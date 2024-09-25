@@ -1,11 +1,15 @@
-import Image from 'next/image'
+import Image from 'next/image';
+import React from 'react'
 import logo from '../app/assets/logo.png'
-import LoginForm from '@/components/LoginForm'
 import login from '../app/assets/login-image.jpg'
- 
-export default function Background() {
-  return (
-    <main className='flex'>
+
+const LoginLayout = ({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) => {
+    return (
+            <main className='flex'>
       <div className='w-1/2'>
         <div className='pt-5 pl-5 flex '>
       <Image
@@ -22,7 +26,7 @@ export default function Background() {
       <span className='font-medium  text-5xl'> Hi there,...  </span>
     </div>
     <div>
-      <LoginForm/>
+    {children}
     </div>
     </div>
     
@@ -37,5 +41,9 @@ export default function Background() {
     
     </main>
     
-  )
+            
+    )
 }
+
+
+export default LoginLayout

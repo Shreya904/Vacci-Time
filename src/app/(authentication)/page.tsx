@@ -1,9 +1,10 @@
 'use client'
 
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Button } from './ui/button';
-import { Label } from './ui/label';
+
 
 type FormValues = {
     Email: string;

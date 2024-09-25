@@ -1,6 +1,6 @@
 import React from 'react'
 
-const navLayout = ({
+const NavLayout = ({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -13,4 +13,4 @@ const navLayout = ({
 }
 
 
-export default navLayout
+export default NavLayout
