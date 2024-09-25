@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import chImg from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const DashBoard = () => {
   return (
@@ -28,7 +29,14 @@ const DashBoard = () => {
 
         {/* User Information */}
         <div className="bg-[#1e293b] p-6 rounded-lg shadow-inner">
-          <h2 className="text-2xl font-semibold text-white">Keshav Yadav</h2>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+
+          <h2 className="text-2xl mt-2 font-semibold text-white">
+            Keshav Yadav
+          </h2>
           <p className="text-md text-gray-400 mt-2">9829887724</p>
           <p className="text-md text-gray-400">keshav9829@gmail.com</p>
         </div>
