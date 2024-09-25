@@ -1,55 +1,107 @@
+'use client'
+
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-// import { Button } from "@/components/ui/button"
-
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";  // Importing the Button from ShadCN
 
 type FormValues = {
-    Name: string;
-    PhoneNumber: string;
-    Email: string;
-    Password: string;
+    name: string;
+    phoneNumber: string;
+    email: string;
+    password: string;
 };
 
 const SignupForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
 
-    const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
-    console.log(errors);
+    const onSubmit: SubmitHandler<FormValues> = (data) => {
+        console.log(data);
+    };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-                type="text"
-                placeholder="Name"
-                {...register("Name", { required: true })}
-            />
-            {errors.Name && <span>Name is required</span>}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div>
+                <Label htmlFor="name">Name</Label>
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    {...register("name", { required: "Name is required" })}
+                    className="border rounded p-2 w-full"
+                />
+                {errors.name && <span className="text-red-600">{errors.name.message}</span>}
+            </div>
 
-            <input
-                type="number"
-                placeholder="Phone Number"
-                {...register("PhoneNumber", { required: true, minLength: 10, maxLength: 10 })}
-            />
-            {errors.PhoneNumber && <span>Phone number must be exactly 10 digits</span>}
+            <div>
+                <Label htmlFor="phoneNumber">Phone Number</Label>
+                <input
+                    id="phoneNumber"
+                    type="text"
+                    placeholder="Enter your phone number"
+                    {...register("phoneNumber", {
+                        required: "Phone number is required",
+                        minLength: {
+                            value: 10,
+                            message: "Phone number must be at least 10 digits",
+                        },
+                        maxLength: {
+                            value: 10,
+                            message: "Phone number must not exceed 10 digits",
+                        },
+                        pattern: {
+                            value: /^[0-9]+$/,
+                            message: "Phone number must contain only digits",
+                        },
+                    })}
+                    className="border rounded p-2 w-full"
+                />
+                {errors.phoneNumber && (
+                    <span className="text-red-600">{errors.phoneNumber.message}</span>
+                )}
+            </div>
 
-            <input
-                type="text"
-                placeholder="Email"
-                {...register("Email", { required: true, pattern: /^\S+@\S+$/i })}
-            />
-            {errors.Email && <span>Email is required and must be valid</span>}
+            <div>
+                <Label htmlFor="email">Email</Label>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                            value: /^\S+@\S+$/i,
+                            message: "Invalid email address",
+                        },
+                    })}
+                    className="border rounded p-2 w-full"
+                />
+                {errors.email && <span className="text-red-600">{errors.email.message}</span>}
+            </div>
 
-            <input
-                type="password"
-                placeholder="Password"
-                {...register("Password", { required: true, minLength: 8 })}
-            />
-            {errors.Password && <span>Password must be at least 8 characters</span>}
+            <div>
+                <Label htmlFor="password">Password</Label>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    {...register("password", {
+                        required: "Password is required",
+                        minLength: {
+                            value: 8,
+                            message: "Password must be at least 8 characters",
+                        },
+                    })}
+                    className="border rounded p-2 w-full"
+                />
+                {errors.password && <span className="text-red-600">{errors.password.message}</span>}
+            </div>
 
-            <input type="submit" />
+            <Button type="submit" className="w-full">
+                Submit
+            </Button>
         </form>
     );
-}
+};
 
-
-export default SignupForm
+export default SignupForm;
