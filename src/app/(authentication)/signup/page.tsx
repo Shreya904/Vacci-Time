@@ -3,7 +3,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";  // Importing the Button from ShadCN
+import { Button } from "@/components/ui/button";
 
 type FormValues = {
     name: string;
