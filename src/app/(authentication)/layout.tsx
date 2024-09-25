@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react'
 import logo from '../assets/logo.png'
-import login from '../assets/login-image.jpg'
+import login from '../assets/background.jpg'
 
 const LoginLayout = ({
   children,
