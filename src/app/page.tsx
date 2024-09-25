@@ -17,6 +17,9 @@ export default function Background() {
       VacciTime 
     </span>
     </div>
+    <div className='flex'>
+      <span className='font-medium  text-5xl'> Hi there,...  </span>
+    </div>
     <div>
       <LoginForm/>
     </div></div>
@@ -27,6 +30,7 @@ export default function Background() {
       src={login}
       />
     </div>
+    
     </main>
     
   )

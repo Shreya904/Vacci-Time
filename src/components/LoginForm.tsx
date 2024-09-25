@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Button } from './ui/button';
+import { Label } from './ui/label';
 
 type FormValues = {
     Email: string;
@@ -17,21 +19,32 @@ const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input
+            <div>
+            <div>
+            <Label htmlFor="email">Your email address</Label>
+
+            <input id='email'
                 type="text"
                 placeholder="Email"
                 {...register("Email", { required: true, pattern: /^\S+@\S+$/i })}
             />
             {errors.Email && <span>Email is required and must be valid</span>}
-
+            </div>
+            <div>
+                <span>Password</span>
             <input
                 type="password"
                 placeholder="Password"
                 {...register("Password", { required: true, minLength: 8 })}
             />
             {errors.Password && <span>Password must be at least 8 characters</span>}
-
-            <input type="submit" />
+            </div>
+            <div>
+            <Button variant="outline">Log In</Button>
+            </div>
+           
+            </div>
+           
         </form>
     );
 }
