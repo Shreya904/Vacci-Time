@@ -1,8 +1,16 @@
 
-export default function Login() {
+  import Image from 'next/image'
+  
+  export default function Login() {
   return (
-    <div>
-      Login
+    <div >
+      <Image
+      src="/assets/background.jpg"
+      width={1000}
+      height={1000}
+      alt="Picture of the author"
+    />
+
     </div>
   );
 }
