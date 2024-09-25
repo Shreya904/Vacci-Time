@@ -27,7 +27,7 @@ const ChildTable = () => {
       <h1 className="text-center w-full text-xl my-7 font-semibold">
         Manage Your Child
       </h1>
-      <Table className="w-[50%] mx-auto">
+      <Table className="w-[80%] mx-auto">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Id</TableHead>

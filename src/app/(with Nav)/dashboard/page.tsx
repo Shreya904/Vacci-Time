@@ -7,18 +7,20 @@ import ChildTable from "@/components/ChildTable";
 
 const DashBoard = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center md:items-start p-8 bg-[#09111f] min-h-screen w-full overflow-hidden">
+    <div className="flex flex-col md:flex-row items-center md:items-start  bg-[#09111f] min-h-screen w-full overflow-hidden">
       {/* Image Section */}
-      <Image
-        src={chImg}
-        height={800} // Set a fixed height to match the text section
-        width={800} // Maintain aspect ratio
-        alt="children"
-        className="hidden md:block h-full object-cover rounded-lg shadow-lg max-w-[35%] mr-8"
-      />
+      <div className="md:w-[40%] w-0 h-[90vh] stcky left-0 bottom-0 flex items-center">
+        <Image
+          src={chImg}
+          height={1000}
+          width={1000}
+          alt="children"
+          className="hidden md:block rounded-lg shadow-lg  mr-8"
+        />
+      </div>
 
       {/* Text Section */}
-      <div className="flex-1 space-y-6 bg-[#0f172a] p-8 rounded-lg shadow-md max-w-2xl h-full min-w-[60%]">
+      <div className="flex-1 space-y-6 bg-[#0f172a] p-8 rounded-lg shadow-md  h-full md:min-w-[60%] w-full">
         <div className="mb-6">
           <h1 className="text-4xl font-bold text-white mb-4">Hey There!</h1>
           <p className="text-lg text-gray-400 leading-relaxed">
@@ -44,7 +46,7 @@ const DashBoard = () => {
 
         {/* Add Child Button */}
         <div className="mt-8 flex justify-start">
-          <Button className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 focus:ring focus:ring-blue-300">
+          <Button className="bg-green-700 text-white px-6 py-2 rounded-md focus:ring focus:ring-blue-300 w-full">
             Add Child
           </Button>
         </div>

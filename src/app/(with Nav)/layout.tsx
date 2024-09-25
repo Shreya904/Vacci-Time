@@ -1,3 +1,4 @@
+import NavbarComp from '@/components/NavbarComp';
 import React from 'react'
 
 const NavLayout = ({
@@ -7,6 +8,7 @@ const NavLayout = ({
 }>) => {
     return (
         <div>
+            <NavbarComp />
             {children}
         </div>
     )

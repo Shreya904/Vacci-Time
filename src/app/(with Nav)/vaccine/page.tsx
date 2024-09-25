@@ -166,11 +166,11 @@ const Vaccine = () => {
             </CardHeader>
             <CardContent>
               {vaccine.vaccines.map((title, id) => (
-                <div key={id} className="mt-2">
-                  <CardDescription className="text-lg text-blue-300">
+                <div key={id} className="mt-3">
+                  <CardDescription className="text-lg text-green-700 font-medium">
                     {title.name}
                   </CardDescription>
-                  <p className="text-gray-400">{title.description}</p>
+                  <p className="text-neutral-400">{title.description}</p>
                 </div>
               ))}
             </CardContent>
