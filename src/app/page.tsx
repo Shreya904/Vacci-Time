@@ -17,12 +17,16 @@ export default function Background() {
       VacciTime 
     </span>
     </div>
-    <div className='flex'>
+    <div>
+    <div>
       <span className='font-medium  text-5xl'> Hi there,...  </span>
     </div>
     <div>
       <LoginForm/>
-    </div></div>
+    </div>
+    </div>
+    
+    </div>
       
     <div className='w-1/2 h-screen'>
     <Image className='h-full'
