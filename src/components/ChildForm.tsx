@@ -24,7 +24,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "@/hooks/use-toast"
 
 // Schema with added fields
@@ -118,67 +117,6 @@ const ChildForm = () => {
                                 <FormDescription>
                                     Your date of birth is used to calculate your age.
                                 </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    {/* ID Type Select */}
-                    <FormField
-                        control={form.control}
-                        name="idType"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>ID Type</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select ID type" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="adhaar">Adhaar Card</SelectItem>
-                                        <SelectItem value="birthCertificate">Birth Certificate</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormDescription>This field is optional.</FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    {/* ID Number field */}
-                    <FormField
-                        control={form.control}
-                        name="idNumber"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>ID Number</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Enter ID number" {...field} />
-                                </FormControl>
-                                <FormDescription>This field is optional.</FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    {/* Image Upload */}
-                    <FormField
-                        control={form.control}
-                        name="image"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Upload ID Image (optional)</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={(e) => field.onChange(e.target.files?.[0])}
-                                        className="hover:bg-white text-white"
-                                    />
-                                </FormControl>
-                                <FormDescription>Image must be under 500KB.</FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
