@@ -4,6 +4,8 @@ import Image from "next/image";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChildTable from "@/components/ChildTable";
+import { IoMdPerson } from "react-icons/io";
+import { FaUserPlus } from "react-icons/fa6";
 
 const DashBoard = () => {
   return (
@@ -34,7 +36,9 @@ const DashBoard = () => {
         <div className="bg-[#1e293b] p-6 rounded-lg shadow-inner">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>
+              <IoMdPerson />
+            </AvatarFallback>
           </Avatar>
 
           <h2 className="text-2xl mt-2 font-semibold text-white">
@@ -46,8 +50,8 @@ const DashBoard = () => {
 
         {/* Add Child Button */}
         <div className="mt-8 flex justify-start">
-          <Button className="bg-green-700 text-white px-6 py-2 rounded-md focus:ring focus:ring-blue-300 w-full">
-            Add Child
+          <Button className="bg-green-700 gap-1 text-white px-6 py-2 rounded-md focus:ring focus:ring-blue-300 w-full">
+            Add Child <FaUserPlus className="text-white text-base" />
           </Button>
         </div>
 
