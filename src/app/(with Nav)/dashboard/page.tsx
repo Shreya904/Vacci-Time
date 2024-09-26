@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChildTable from "@/components/ChildTable";
 import { IoMdPerson } from "react-icons/io";
 import { FaUserPlus } from "react-icons/fa6";
+import { MdWavingHand } from "react-icons/md";
 
 const DashBoard = () => {
   return (
@@ -24,7 +25,9 @@ const DashBoard = () => {
       {/* Text Section */}
       <div className="flex-1 space-y-6 bg-[#0f172a] p-8 rounded-lg shadow-md  h-full md:min-w-[60%] w-full">
         <div className="mb-6">
-          <h1 className="text-4xl font-bold text-white mb-4">Hey There!</h1>
+          <h1 className="text-4xl flex gap-2 font-bold text-white mb-4">
+            Hey There! <MdWavingHand className="text-4xl" />
+          </h1>
           <p className="text-lg text-gray-400 leading-relaxed">
             Keep your little ones safe and healthy! Stay updated on their
             vaccination schedule with our easy reminders, so you never miss an
