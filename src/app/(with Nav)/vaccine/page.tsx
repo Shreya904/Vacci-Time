@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { FaSyringe } from "react-icons/fa";
 
 const Vaccine = () => {
   const vaccinationSchedule = [
@@ -153,12 +154,15 @@ const Vaccine = () => {
 
   return (
     <div className="bg-[#09111f] min-h-screen p-8">
-      <h1 className="text-3xl font-bold text-white mb-6">
-        Vaccination Details
+      <h1 className="text-3xl gap-2 font-bold flex text-white mb-6">
+        Vaccination Details <FaSyringe />
       </h1>
-      <div className="space-y-4">
+      <div className="flex flex-wrap gap-4">
         {vaccinationSchedule.map((vaccine, id) => (
-          <Card key={id} className="bg-[#1e293b] shadow-lg rounded-lg p-4">
+          <Card
+            key={id}
+            className="bg-[#1e293b] shadow-lg rounded-lg p-4 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)]"
+          >
             <CardHeader className="border-b border-gray-700 pb-2">
               <CardTitle className="text-xl font-semibold text-white">
                 {vaccine.age}
@@ -166,11 +170,11 @@ const Vaccine = () => {
             </CardHeader>
             <CardContent>
               {vaccine.vaccines.map((title, id) => (
-                <div key={id} className="mt-3">
-                  <CardDescription className="text-lg text-green-700 font-medium">
+                <div key={id} className="mt-2">
+                  <CardDescription className="text-lg text-green-700">
                     {title.name}
                   </CardDescription>
-                  <p className="text-neutral-400">{title.description}</p>
+                  <p className="text-gray-400">{title.description}</p>
                 </div>
               ))}
             </CardContent>
