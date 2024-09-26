@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
+import { MdEdit, MdDelete } from "react-icons/md";
 
 const invoices = [
   {
@@ -43,9 +44,11 @@ const ChildTable = () => {
               <TableCell>{invoice.age}</TableCell>
               <TableCell>{invoice.name}</TableCell>
               <TableCell className="text-right">
-                <Button variant="secondary">Edit</Button>
+                <Button variant="secondary" className="gap-1">
+                  Edit <MdEdit className="text-base" />
+                </Button>
                 <Button variant="destructive" className="mx-1">
-                  Delete
+                  Delete <MdDelete className="text-lg" />
                 </Button>
               </TableCell>
             </TableRow>

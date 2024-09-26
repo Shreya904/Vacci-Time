@@ -5,6 +5,9 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChildTable from "@/components/ChildTable";
 import Link from "next/link";
+import { IoMdPerson } from "react-icons/io";
+import { FaUserPlus } from "react-icons/fa6";
+import { MdWavingHand } from "react-icons/md";
 
 const DashBoard = () => {
   return (
@@ -23,7 +26,9 @@ const DashBoard = () => {
       {/* Text Section */}
       <div className="flex-1 space-y-6 bg-[#0f172a] p-8 rounded-lg shadow-md  h-full md:min-w-[60%] w-full">
         <div className="mb-6">
-          <h1 className="text-4xl font-bold text-white mb-4">Hey There!</h1>
+          <h1 className="text-4xl flex gap-2 font-bold text-white mb-4">
+            Hey There! <MdWavingHand className="text-4xl" />
+          </h1>
           <p className="text-lg text-gray-400 leading-relaxed">
             Keep your little ones safe and healthy! Stay updated on their
             vaccination schedule with our easy reminders, so you never miss an
@@ -35,7 +40,9 @@ const DashBoard = () => {
         <div className="bg-[#1e293b] p-6 rounded-lg shadow-inner">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>
+              <IoMdPerson />
+            </AvatarFallback>
           </Avatar>
 
           <h2 className="text-2xl mt-2 font-semibold text-white">
@@ -48,8 +55,8 @@ const DashBoard = () => {
         {/* Add Child Button */}
         <div className="mt-8 flex justify-start">
           <Link href='/addchild' className="w-full">
-            <Button className="bg-green-700 text-white px-6 py-2 rounded-md focus:ring focus:ring-blue-300 w-full">
-              Add Child
+            <Button className="bg-green-700 gap-1 text-white px-6 py-2 rounded-md focus:ring focus:ring-blue-300 w-full">
+              Add Child <FaUserPlus className="text-white text-base" />
             </Button>
           </Link>
         </div>
