@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ChildTable from "@/components/ChildTable";
+import Link from "next/link";
 
 const DashBoard = () => {
   return (
@@ -46,9 +47,11 @@ const DashBoard = () => {
 
         {/* Add Child Button */}
         <div className="mt-8 flex justify-start">
-          <Button className="bg-green-700 text-white px-6 py-2 rounded-md focus:ring focus:ring-blue-300 w-full">
-            Add Child
-          </Button>
+          <Link href='/addchild' className="w-full">
+            <Button className="bg-green-700 text-white px-6 py-2 rounded-md focus:ring focus:ring-blue-300 w-full">
+              Add Child
+            </Button>
+          </Link>
         </div>
 
         <ChildTable />
