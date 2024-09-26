@@ -17,9 +17,8 @@ const LoginLayout = ({
             src={logo}
             width={500}
             height={500}
-            className="w-[32px] "
+            className="w-28 "
           />
-          <span className=" font-bold text-md ">VacciTime</span>
         </div>
 
         <div className="h-fit w-[80%] mx-auto ">
