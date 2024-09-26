@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
+import { IoMdPersonAdd } from "react-icons/io";
 
 // Define the schema using Zod
 const SignupSchema = z.object({
@@ -116,8 +117,9 @@ const SignupForm = () => {
                     />
 
                     {/* Submit Button */}
-                    <Button className="w-full bg-green-700" type="submit">
-                        Submit
+                    <Button className="w-full gap-1 bg-green-700" type="submit">
+                        Create Account
+                        <IoMdPersonAdd className="text-white text-lg" />
                     </Button>
                 </form>
             </Form>
