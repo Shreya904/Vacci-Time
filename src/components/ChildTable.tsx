@@ -3,7 +3,7 @@ import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/fire
 import { db, auth } from "@/lib/firebase"; // Ensure `db` is Firestore instance
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "./ui/button";
-import { MdEdit, MdDelete } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { checkAndSendVaccineReminderSms } from "@/lib/sendSms";
 
 // Define a Child type
@@ -46,8 +46,8 @@ const ChildTable = () => {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Id</TableHead>
-            <TableHead>Age</TableHead>
-            <TableHead>Name</TableHead>
+            <TableHead className="text-center">Age</TableHead>
+            <TableHead className="text-center">Name</TableHead>
             <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
@@ -55,9 +55,9 @@ const ChildTable = () => {
           {children.map((child) => (
             <TableRow key={child.id}>
               <TableCell className="font-medium">{child.id}</TableCell>
-              <TableCell>{child.age}</TableCell>
-              <TableCell>{child.childName}</TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-center">{child.age}</TableCell>
+              <TableCell className="text-center">{child.childName}</TableCell>
+              <TableCell className="text-center">
                 <Button variant="destructive" className="mx-1" onClick={() => deleteChild(child.id)}>
                   Delete <MdDelete className="text-lg" />
                 </Button>
