@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
     Form,
     FormControl,
@@ -17,49 +17,59 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover"
-import { toast } from "@/hooks/use-toast"
+} from "@/components/ui/popover";
+import { toast } from "@/hooks/use-toast";
 
 // Schema with added fields
-const FormSchema = z.object({
+export const FormSchema = z.object({  // Export FormSchema here
     dob: z.date({
         required_error: "A date of birth is required.",
     }),
     childName: z.string().min(1, "Child's name is required."),
-    idType: z.enum(["adhaar", "birthCertificate"]).optional(),
-    idNumber: z.string().optional(),
-    image: z
-        .any()
-        .refine((file) => file?.size <= 500 * 1024, "Image must be less than 500KB")
-        .optional(),
-})
+});
 
-const ChildForm = () => {
-    const form = useForm<z.infer<typeof FormSchema>>({
+// Type for the form data
+type FormData = z.infer<typeof FormSchema>;
+
+// Function to calculate age from DOB
+function calculateAge(dob: Date): number {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+// Update the ChildForm component to accept onSubmit as a prop
+const ChildForm = ({ onSubmit }: { onSubmit: (data: FormData) => Promise<void> }) => {
+    const form = useForm<FormData>({
         resolver: zodResolver(FormSchema),
-    })
+    });
 
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        })
+    async function handleSubmit(data: FormData) {
+        const age = calculateAge(data.dob);
+        const updatedData = { ...data, age };
+
+        // Call the parent's onSubmit function to handle data submission
+        await onSubmit(updatedData);
+
+        // Reset the form after submission
+        form.reset();
     }
 
     return (
         <div className="md:w-[60%] w-[90%] mx-auto">
-            <Form {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8 ">
 
                     {/* Child's name field */}
                     <FormField
@@ -115,7 +125,7 @@ const ChildForm = () => {
                                     </PopoverContent>
                                 </Popover>
                                 <FormDescription>
-                                    Your date of birth is used to calculate your age.
+                                    The date of birth is used to calculate your child's age.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
@@ -126,8 +136,7 @@ const ChildForm = () => {
                 </form>
             </Form>
         </div>
-    )
-}
+    );
+};
 
-
-export default ChildForm
+export default ChildForm;

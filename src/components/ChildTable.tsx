@@ -1,28 +1,39 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { useEffect, useState } from "react";
+import { collection, query, where, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { db, auth } from "@/lib/firebase"; // Ensure `db` is Firestore instance
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "./ui/button";
 import { MdEdit, MdDelete } from "react-icons/md";
 
-const invoices = [
-  {
-    id: "INV001",
-    age: "5",
-    name: "john doe",
-  },
-  {
-    id: "INV002",
-    age: "2",
-    name: "john doe",
-  },
-];
+// Define a Child type
+interface Child {
+  id: string;
+  age: number; // Adjust type based on your Firestore data structure
+  childName: string; // Adjust type based on your Firestore data structure
+}
 
 const ChildTable = () => {
+  const [children, setChildren] = useState<Child[]>([]); // Specify the state type as Child[]
+
+  useEffect(() => {
+    const fetchChildren = async () => {
+      const user = auth.currentUser; // Get the logged-in user
+      if (user) {
+        const q = query(collection(db, "children"), where("userId", "==", user.uid));
+        const querySnapshot = await getDocs(q);
+        const fetchedChildren: Child[] = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Child[]; // Ensure correct typing
+        setChildren(fetchedChildren);
+      }
+    };
+
+    fetchChildren();
+  }, []);
+
+  const deleteChild = async (id: string) => { // Specify the parameter type
+    await deleteDoc(doc(db, "children", id));
+    setChildren(children.filter(child => child.id !== id));
+  };
+
   return (
     <div className="w-full flex flex-col items-center">
       <h1 className="text-center w-full text-xl my-7 font-semibold">
@@ -38,16 +49,13 @@ const ChildTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.id}>
-              <TableCell className="font-medium">{invoice.id}</TableCell>
-              <TableCell>{invoice.age}</TableCell>
-              <TableCell>{invoice.name}</TableCell>
+          {children.map((child) => (
+            <TableRow key={child.id}>
+              <TableCell className="font-medium">{child.id}</TableCell>
+              <TableCell>{child.age}</TableCell>
+              <TableCell>{child.childName}</TableCell>
               <TableCell className="text-right">
-                <Button variant="secondary" className="gap-1">
-                  Edit <MdEdit className="text-base" />
-                </Button>
-                <Button variant="destructive" className="mx-1">
+                <Button variant="destructive" className="mx-1" onClick={() => deleteChild(child.id)}>
                   Delete <MdDelete className="text-lg" />
                 </Button>
               </TableCell>

@@ -17,8 +17,12 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { IoMdPersonAdd } from "react-icons/io";
+import { auth } from "@/lib/firebase"; // Firebase initialization
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"; // Firebase auth methods
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-// Define the schema using Zod
+// Define the schema using Zod for validation
 const SignupSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters long" }),
     phoneNumber: z.string()
@@ -29,6 +33,9 @@ const SignupSchema = z.object({
 });
 
 const SignupForm = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const router = useRouter();
+    
     // Initialize the form using `react-hook-form` with `zodResolver`
     const form = useForm<z.infer<typeof SignupSchema>>({
         resolver: zodResolver(SignupSchema),
@@ -41,16 +48,36 @@ const SignupForm = () => {
     });
 
     // Handle form submission
-    function onSubmit(data: z.infer<typeof SignupSchema>) {
-        toast({
-            title: "Form Submitted",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        });
-    }
+    const onSubmit = async (data: z.infer<typeof SignupSchema>) => {
+        setIsLoading(true); // Disable form during submission
+        try {
+            // Firebase user creation
+            const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            const user = userCredential.user;
+
+            // Update Firebase user profile with the name
+            await updateProfile(user, {
+                displayName: data.name,
+            });
+
+            // Show success message
+            toast({
+                title: "Account Created",
+                description: `Welcome, ${data.name}!`,
+            });
+
+            // Redirect the user to a dashboard or home page
+            router.push("/"); // Redirect to the dashboard after successful sign-up
+        } catch (error) {
+            // Handle errors (like email already in use)
+            toast({
+                title: "Registration Failed",
+                description: `Error: ${error}`,
+            });
+        } finally {
+            setIsLoading(false); // Re-enable the form
+        }
+    };
 
     return (
         <>
@@ -117,14 +144,16 @@ const SignupForm = () => {
                     />
 
                     {/* Submit Button */}
-                    <Button className="w-full gap-1 bg-green-700" type="submit">
-                        Create Account
+                    <Button className="w-full gap-1 bg-green-700" type="submit" disabled={isLoading}>
+                        {isLoading ? "Registering..." : "Create Account"}
                         <IoMdPersonAdd className="text-white text-lg" />
                     </Button>
                 </form>
             </Form>
-            <Link href='/' >
-                <Button variant="link" className="text-neutral-400  w-2/3 mt-2">Already have an account? Login</Button>
+            <Link href='/login'>
+                <Button variant="link" className="text-neutral-400 w-2/3 mt-2">
+                    Already have an account? Login
+                </Button>
             </Link>
         </>
     );
