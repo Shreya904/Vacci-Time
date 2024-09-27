@@ -4,6 +4,7 @@ import { db, auth } from "@/lib/firebase"; // Ensure `db` is Firestore instance
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "./ui/button";
 import { MdEdit, MdDelete } from "react-icons/md";
+import { checkAndSendVaccineReminderSms } from "@/lib/sendSms";
 
 // Define a Child type
 interface Child {
@@ -27,6 +28,8 @@ const ChildTable = () => {
     };
 
     fetchChildren();
+
+    checkAndSendVaccineReminderSms();
   }, []);
 
   const deleteChild = async (id: string) => { // Specify the parameter type
