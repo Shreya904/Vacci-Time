@@ -68,7 +68,6 @@ const DashBoard = () => {
             <h2 className="text-2xl mt-2 font-semibold text-white">
               {user?.displayName || "User"}
             </h2>
-            <p className="text-md text-gray-400 mt-2">{user?.phoneNumber || "No phone number available"}</p>
             <p className="text-md text-gray-400">{user?.email || "No email available"}</p>
           </div>
 
