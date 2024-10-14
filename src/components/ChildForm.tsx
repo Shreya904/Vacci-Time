@@ -24,7 +24,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { toast } from "@/hooks/use-toast";
 
 // Schema with added fields
 export const FormSchema = z.object({  // Export FormSchema here
@@ -125,7 +124,7 @@ const ChildForm = ({ onSubmit }: { onSubmit: (data: FormData) => Promise<void> }
                                     </PopoverContent>
                                 </Popover>
                                 <FormDescription>
-                                    The date of birth is used to calculate your child's age.
+                                    The date of birth is used to calculate your child&apos;s age.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
